@@ -12,9 +12,9 @@ from src.utils import dataset2class, click_dataset, multiple_dataset, multiple_i
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='ml-1m')
-    parser.add_argument('--input_path', type=str, default=None)
-    parser.add_argument('--output_path', type=str, default=None)
+    parser.add_argument('--dataset', type=str, default='yelp')
+    parser.add_argument('--input_path', type=str, default='/home/lllrrr/Dataset/yelp_dataset')
+    parser.add_argument('--output_path', type=str, default='/home/lllrrr/Dataset/output_data/yelp_output')
     parser.add_argument('--interaction_type', type=str, default=None)
     parser.add_argument('--duplicate_removal', action='store_true')
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     assert args.output_path is not None, 'output_path can not be None, please specify the output_path'
 
     input_args = [args.input_path, args.output_path]
-    dataset_class_name = dataset2class[args.dataset.lower()]
+    dataset_class_name = dataset2class[args.dataset.lower()] # YELPDataset
     dataset_class = getattr(importlib.import_module('src.extended_dataset'), dataset_class_name)
     if dataset_class_name in multiple_dataset:
         input_args.append(args.interaction_type)
